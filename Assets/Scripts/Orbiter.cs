@@ -6,12 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Orbiter : MonoBehaviour
 {
+    public Transform orbitTarget;  // gameObject to orbit around (E.g., a planet)
     [SerializeField]
-    Transform orbitTarget;  // gameObject to orbit around (E.g., a planet)
+    float gravity = 12;          // multiplier of gravity force
     [SerializeField]
-    float gravity;          // multiplier of gravity force
-    [SerializeField]
-    float rotationSmoothing;    //smoothing of rotation
+    float rotationSmoothing = 50;    //smoothing of rotation
 
     Rigidbody rb;
     Vector3 gravityUp;      // the vector pointing upwards (Should always be a normalized vector)
@@ -22,6 +21,7 @@ public class Orbiter : MonoBehaviour
         if (orbitTarget == null)
         {
             Debug.LogWarning("No orbitTarget set!");
+            orbitTarget = GameObject.Find("Planetary Body").transform;
         }
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
@@ -43,6 +43,7 @@ public class Orbiter : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSmoothing * Time.deltaTime);
     }
 
+    // Sets the target to orbit around
     public void SetOrbitTarget(Transform target)
     {
         if (target == null)
@@ -53,6 +54,7 @@ public class Orbiter : MonoBehaviour
         orbitTarget = target;
     }
 
+    // Gets the gravityUp
     public Vector3 GetGravityUp()
     {
         return gravityUp;

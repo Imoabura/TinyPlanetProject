@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3636049472414661722}
   - component: {fileID: 3636049472414661720}
   - component: {fileID: 8719677520493525709}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ProjectileParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orbitTarget: {fileID: 0}
-  gravity: 20
+  gravity: 10000
   rotationSmoothing: 50
 --- !u!114 &3636049472414661720
 MonoBehaviour:
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3bcb9caf8552514692508828f999303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.1
+  moveSpeed: 0.5
   damage: 0
   childLocalTransform: {fileID: 3636049473396693368}
 --- !u!1 &3636049473396693371
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 3636049473396693375}
   - component: {fileID: 3636049473396693374}
   - component: {fileID: 3636049473396693369}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

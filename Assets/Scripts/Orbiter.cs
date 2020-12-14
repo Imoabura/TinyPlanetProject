@@ -65,4 +65,9 @@ public class Orbiter : MonoBehaviour
     {
         rb.MovePosition(transform.position + moveVector);
     }
+
+    public Transform GetOrbitTarget()
+    {
+        return orbitTarget;
+    }
 }

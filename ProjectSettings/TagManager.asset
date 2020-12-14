@@ -16,10 +16,10 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Projectile
+  - Planet
+  - Rotater
   - 
   - 
   - 

@@ -7,17 +7,15 @@ public class Ranged : MonoBehaviour
 {
     [SerializeField]
     GameObject projectilePrefab;    // The projectile prefab
-    [SerializeField]
-    Transform spawnLoc;             // location to spawn projectile
-    [SerializeField]
-    Transform target;               // target to shoot at
 
     Orbiter orbiter;
+    Transform localTransform;
 
     // Start is called before the first frame update
     void Start()
     {
         orbiter = GetComponent<Orbiter>();
+        localTransform = transform.Find("Player").GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -27,22 +25,13 @@ public class Ranged : MonoBehaviour
         {
             Fire();
         }
+        Debug.DrawRay(localTransform.position, localTransform.forward * 20, Color.red);
     }
 
     // Fire the projectile
     public void Fire()
     {
-        GameObject projectile = Instantiate(projectilePrefab, spawnLoc.position, Quaternion.identity);
-        projectile.GetComponent<Projectile>().InitializeProjectile(this.gameObject, GetTargetDirection());
-    }
-
-    public Vector3 GetTargetDirection()
-    {
-        if (target != null)
-        {
-            Vector3 VectorToTarget = (target.position - transform.position).normalized;
-            return (VectorToTarget + orbiter.GetGravityUp()).normalized;
-        }
-        return transform.forward;
+        GameObject projectile = Instantiate(projectilePrefab, Vector3.zero, Quaternion.identity);
+        projectile.GetComponent<ProjectileSphere>().InitializeProjectile(orbiter.GetOrbitTarget(), localTransform.forward, orbiter.GetGravityUp());
     }
 }

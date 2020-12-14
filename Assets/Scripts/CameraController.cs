@@ -35,8 +35,10 @@ public class CameraController : MonoBehaviour
     {
         Vector3 gravityUp = (viewTarget.position - orbitTarget.position).normalized;
 
-        Quaternion targetRotation = Quaternion.FromToRotation(cameraSphere.transform.up, gravityUp) * cameraSphere.transform.rotation;
-        cameraSphere.transform.rotation = Quaternion.Slerp(cameraSphere.transform.rotation, targetRotation, 50f * Time.deltaTime);
+        cameraParent.transform.position = gravityUp * 31;
+
+        Quaternion targetRotation = Quaternion.FromToRotation(cameraParent.transform.forward, -gravityUp) * cameraParent.transform.rotation;
+        cameraParent.transform.rotation = Quaternion.Slerp(cameraParent.transform.rotation, targetRotation, 50f * Time.deltaTime);
 
         camRotation -= camRotateSpeed * Input.GetAxis("Mouse X");
         this.transform.localRotation = Quaternion.Euler(0, 0, camRotation);

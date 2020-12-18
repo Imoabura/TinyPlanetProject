@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
     Transform spawnLoc;
     [SerializeField]
     GameObject projectilePrefab;
+    [SerializeField]
+    GameController gameController;
 
     Orbiter orbiter;
 
@@ -22,15 +24,17 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         orbiter = GetComponent<Orbiter>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= shootCooldown)
+        if (timer >= shootCooldown && !gameController.isGameOver())
         {
             timer = 0;
+            shoot();
         }
     }
 
@@ -51,7 +55,7 @@ public class Enemy : MonoBehaviour
 
     private void die()
     {
-        // To-Do: Add to score, play sound, play effect, etc..
+        GameObject.Find("GameController").GetComponent<GameController>().enemyKilled();
         Destroy(this.gameObject);
     }
 }

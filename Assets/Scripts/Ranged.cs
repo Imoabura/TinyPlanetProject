@@ -11,6 +11,9 @@ public class Ranged : MonoBehaviour
     Orbiter orbiter;
     Transform localTransform;
 
+    [SerializeField]
+    GameController gameController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +24,7 @@ public class Ranged : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))   // FOR TESTING ONLY
+        if (Input.GetKeyDown(KeyCode.Space) && !gameController.isGameOver())
         {
             Fire();
         }

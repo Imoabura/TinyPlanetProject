@@ -9,16 +9,13 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     float moveSpeed;
     [SerializeField]
-    float damage;
+    int damage = 1;
     [SerializeField]
     Transform childLocalTransform;
 
     Orbiter orbiter;
     Rigidbody rb;
     GameObject owner;
-    Vector3 moveDirection;
-    Vector3 localMoveDirection;
-    string targetTag;
 
     // Start is called before the first frame update
     void Start()
@@ -29,40 +26,14 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        childLocalTransform.forward = localMoveDirection;
-        moveDirection = childLocalTransform.forward * moveSpeed;
+        childLocalTransform.forward = -orbiter.GetGravityUp();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public void OnTriggerEnter(Collider other)
     {
-        orbiter.MovePosition(moveDirection);
-    }
-
-    public void InitializeProjectile(GameObject owner, Vector3 localDirection)
-    {
-        this.owner = owner;
-        this.localMoveDirection = localDirection;
-        targetTag = "Player";
-    }
-
-    public void InitializeProjectile(GameObject owner, Vector3 localDirection, string tagToHit)
-    {
-        this.owner = owner;
-        this.localMoveDirection = localDirection;
-        targetTag = tagToHit;
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        //if (targetTag == null && collision.gameObject != owner && collision.transform.parent != owner.transform && collision.gameObject.tag != "environment")
-        //{
-        //    Debug.Log("Do: Something on hitting anything other than owner!");
-        //    Destroy(this.gameObject);
-        //}
-        if (collision.gameObject.tag == targetTag)
+        if (other.gameObject.tag == "HitBox")
         {
-            Debug.Log("Do: Something on hit target!");
+            other.gameObject.GetComponent<Planet>().takeDamage(damage);
             Destroy(this.gameObject);
         }
     }

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -10,31 +12,38 @@ public class GameController : MonoBehaviour
     GameObject enemyPrefab;
 
     [SerializeField]
-    int planetMaxHp = 10;
-
-    [SerializeField]
     int enemiesPerWave = 1;
     [SerializeField]
     int delayTime = 10;
     [SerializeField]
     int spawnDist = 25;
 
+    [SerializeField]
+    GameObject planetUI;
+    [SerializeField]
+    GameObject gameOverScreen;
+    [SerializeField]
+    TextMeshProUGUI waveCountField;
+    [SerializeField]
+    TextMeshProUGUI enemiesKilledField;
+
     float timer = 0;
     int enemiesKilled = 0;  //needs to be updated by Enemy.cs
     int waveCount = 0;
-    int planetCurrentHp;
+
+    bool gameIsOver = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        planetCurrentHp = planetMaxHp;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= delayTime)
+        if (timer >= delayTime && !gameIsOver)
         {
             timer = 0;
             spawnEnemies();
@@ -50,9 +59,24 @@ public class GameController : MonoBehaviour
         waveCount++;
     }
 
-    void gameOver()
+    public bool isGameOver()
+    {
+        return gameIsOver;
+    }
+
+    public void gameOver()
     {
         Debug.Log("Game Over!!!");
+        gameIsOver = true;
+        planetUI.SetActive(false);
+        gameOverScreen.SetActive(true);
+        waveCountField.text = waveCount.ToString();
+        enemiesKilledField.text = enemiesKilled.ToString();
+    }
+
+    public void enemyKilled()
+    {
+        enemiesKilled++;
     }
 
     Vector3 generateRandomLoc()
@@ -67,5 +91,10 @@ public class GameController : MonoBehaviour
         result = result.normalized * spawnDist;
         Debug.Log(result);
         return result;
+    }
+
+    public void reload()
+    {
+        SceneManager.LoadScene(0);
     }
 }

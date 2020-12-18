@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 127992594604424946}
   - component: {fileID: 127992594604424947}
   - component: {fileID: 127992594604424948}
+  - component: {fileID: 9085395265207365883}
   m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
@@ -123,6 +124,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9085395265207365883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127992594604424950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6befe7cb40cbb1444829364c3c8d7ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!1 &1169161594560780444
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +208,6 @@ MonoBehaviour:
   rotateSpeed: 3
   localTransform: {fileID: 127992594604424949}
   parentTransform: {fileID: 127992594177006552}
-  childTrandform: {fileID: 127992594604424949}
 --- !u!114 &1169161594560780449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,4 +220,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcf347f3d0fd8e4b8898a4bc6b226d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seconds: 0.75
+  seconds: 1

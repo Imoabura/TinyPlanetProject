@@ -7,23 +7,11 @@ public class ProjectileScript : MonoBehaviour
     [SerializeField]
     int damage; // not used yet
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy")
         {
-            Destroy(other.gameObject);
+            other.GetComponent<Enemy>().takeDamage(damage);
             Destroy(this.gameObject);
         }
     }

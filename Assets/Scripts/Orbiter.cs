@@ -20,7 +20,7 @@ public class Orbiter : MonoBehaviour
     {
         if (orbitTarget == null)
         {
-            Debug.LogWarning("No orbitTarget set!");
+            Debug.LogWarning("No orbitTarget set! Target set to Planetary Body!");
             orbitTarget = GameObject.Find("Planetary Body").transform;
         }
         rb = GetComponent<Rigidbody>();

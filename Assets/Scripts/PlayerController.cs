@@ -13,11 +13,13 @@ public class PlayerController : MonoBehaviour
     Orbiter orbiter;        // Orbiter Script
     Vector3 moveDirection;
 
+    GameController gameController;
 
     // Start is called before the first frame update
     void Start()
     {
         orbiter = GetComponentInParent<Orbiter>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -26,10 +28,12 @@ public class PlayerController : MonoBehaviour
         float playerMoveH = Input.GetAxis("Horizontal");
         float playerMoveV = Input.GetAxis("Vertical");
 
-        moveDirection = ((playerMoveH * transform.right) + (playerMoveV * transform.forward)).normalized;
+        if (!gameController.isGameOver())
+        {
+            moveDirection = ((playerMoveH * transform.right) + (playerMoveV * transform.forward)).normalized;
 
-        transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, -mainCam.localRotation.eulerAngles.z, transform.localRotation.eulerAngles.z);
-
+            transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, -mainCam.localRotation.eulerAngles.z, transform.localRotation.eulerAngles.z);
+        }
         // Debugging rays
         //Debug.DrawRay(transform.position, transform.forward * 20, Color.blue);
         //Debug.DrawRay(transform.position, transform.right * 20, Color.green);

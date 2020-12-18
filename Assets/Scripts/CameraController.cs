@@ -16,6 +16,9 @@ public class CameraController : MonoBehaviour
     float camRotateSpeed;
     float camRotation;
 
+    [SerializeField]
+    float camDist = 40;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +38,7 @@ public class CameraController : MonoBehaviour
     {
         Vector3 gravityUp = (viewTarget.position - orbitTarget.position).normalized;
 
-        cameraParent.transform.position = gravityUp * 31;
+        cameraParent.transform.position = gravityUp * camDist;
 
         Quaternion targetRotation = Quaternion.FromToRotation(cameraParent.transform.forward, -gravityUp) * cameraParent.transform.rotation;
         cameraParent.transform.rotation = Quaternion.Slerp(cameraParent.transform.rotation, targetRotation, 50f * Time.deltaTime);

@@ -191,8 +191,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35fb650ecb99e204988d6feeaa448429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 2
+  rotateSpeed: 3
   localTransform: {fileID: 127992594604424949}
+  parentTransform: {fileID: 127992594177006552}
+  childTrandform: {fileID: 127992594604424949}
 --- !u!114 &1169161594560780449
 MonoBehaviour:
   m_ObjectHideFlags: 0

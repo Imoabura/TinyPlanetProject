@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // The Player Controller Script! Should handle all player key inputs.
-[RequireComponent(typeof(Orbiter))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
